@@ -113,6 +113,36 @@
 ]
 }
 ```
+## 5. GetTransactionByTrackerID - получение транзакции по trackerID.
+## Путь
+### POST "/transaction/trackerID"
+### Headers запроса
+####  -- ApiPublic: string
+####  -- Signature: string
+### Тело запроса
+```json
+{
+    "trackerID": "string"
+}
+```
+### Headers ответа
+* Warning: string(опциональный хедер, приходит, если произошла ошибка)
+### Тело ответа
+```json
+{
+    {
+    "trackerID": "string",          // Внутренний идентификатор транзакции
+    "externalID": "string",         // Ваш уникальный идентификатор транзакции
+    "amount": "1.00",               // float64, сумма транзакции. У выводов отрицательная, а у пополнений - положительная
+    "commission": "-0.15",          // float64, комиссия. Всегда отрицательная
+    "chain": "string",              // Название сети, в которой была совершена транзакция
+    "token": "string",              // Название токена
+    "status": "string",             // Статус: SUCCESS, ACCEPTED, ERROR
+    "hash": "string",               // Хэш транзакции. Уникальный идентификатор транзакции в блокчейне
+    "receiver": "string"            // Кошелек получателя
+    }
+}
+```
 ## Формирование сигнатуры
 ```
 - func calcSignature(secret string, message string) string {
