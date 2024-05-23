@@ -141,6 +141,28 @@
     "receiver": "string"            // Кошелек получателя
 }
 ```
+
+## 6. GetBalance - получение баланса.
+## Путь
+### GET "/balance"
+### Headers запроса
+####  -- ApiPublic: string
+####  -- Signature: string
+
+### Headers ответа
+* Warning: string(опциональный хедер, приходит, если произошла ошибка)
+### Тело ответа
+```json
+{
+  "balance": [
+    {
+      "token": "USDT", // токен
+      "freeze": 0, // замороженный баланс
+      "available": 0 // баланс
+    }
+  ]
+}
+```
 ## Формирование сигнатуры
 ```
 - func calcSignature(secret string, message string) string {
